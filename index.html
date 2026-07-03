@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SPA Dark Minimal - Bottom Nav Glass</title>
+
+  <style>
+    /* =========================
+       CSS Custom Properties
+       ========================= */
+    :root{
+      --bg: #0b0f17;
+      --bg-2: #0a1224;
+      --text: #e8eefc;
+      --muted: rgba(232, 238, 252, .72);
+
+      --card: rgba(255,255,255,.06);
+      --card-2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.10);
+
+      --accent: #7c5cff;
+      --accent-2: #23d5ff;
+
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --radius: 16px;
+
+      --nav-h: 72px;
+      --container: 980px;
+    }
+
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+    body{
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 20% 0%, rgba(124,92,255,.22), transparent 55%),
+        radial-gradient(900px 600px at 95% 15%, rgba(35,213,255,.16), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg-2));
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    :focus-visible{ outline: 2px solid rgba(124,92,255,.7); outline-offset: 3px; border-radius: 10px; }
+
+    /* =========================
+       Layout
+       ========================= */
+    header{
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 18px 16px 10px;
+    }
+    header h1{
+      font-size: 16px;
+      margin: 0;
+      letter-spacing: .2px;
+      color: rgba(232,238,252,.92);
+      font-weight: 650;
+    }
+    header p{
+      margin: 6px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    main{
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 10px 16px calc(var(--nav-h) + 22px + env(safe-area-inset-bottom));
+    }
+
+    /* Each "view" is a SPA section */
+    .view{
+      display: none;
+      animation: fadeIn .18s ease-out;
+    }
+    .view.is-active{ display: block; }
+
+    @keyframes fadeIn{
+      from{ opacity: 0; transform: translateY(4px); }
+      to{ opacity: 1; transform: translateY(0); }
+    }
+
+    /* =========================
+       Home/Info: Vertical full-width link buttons (Flexbox)
+       ========================= */
+    .link-list{
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 6px 0 0;
+    }
+
+    .link-btn{
+      display: block;
+      width: 100%;
+      padding: 14px 14px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      border: 1px solid var(--stroke);
+      box-shadow: 0 10px 28px rgba(0,0,0,.35);
+      color: rgba(232,238,252,.92);
+      font-size: 14px;
+      letter-spacing: .2px;
+      position: relative;
+      overflow: hidden;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .link-btn::before{
+      content:"";
+      position:absolute;
+      inset: -60% -20% auto -20%;
+      height: 160%;
+      background: radial-gradient(circle at 20% 20%, rgba(124,92,255,.22), transparent 55%);
+      opacity: .9;
+      pointer-events: none;
+      transform: translateY(0);
+    }
+    .link-btn:hover{
+      border-color: rgba(124,92,255,.28);
+      transform: translateY(-1px);
+      transition: transform .15s ease, border-color .15s ease;
+    }
+    .link-btn:active{
+      transform: translateY(0);
+      transition: none;
+    }
+
+    .section-title{
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 8px 0 10px;
+    }
+    .section-title h2{
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+    .section-title small{
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    /* =========================
+       Profile card (centered)
+       ========================= */
+    .profile-wrap{
+      min-height: calc(100vh - 140px);
+      display: grid;
+      place-items: center;
+      padding: 10px 0 0;
+    }
+
+    .profile-card{
+      width: min(520px, 100%);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
+      border: 1px solid var(--stroke);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+
+    .profile-head{
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .avatar{
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(35,213,255,.35), transparent 55%),
+        radial-gradient(circle at 70% 70%, rgba(124,92,255,.35), transparent 55%),
+        rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+    }
+    .profile-head h3{
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    .profile-head p{
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .profile-body{
+      font-size: 13px;
+      color: rgba(232,238,252,.86);
+      line-height: 1.6;
+    }
+    .profile-meta{
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .pill{
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(232,238,252,.86);
+      font-size: 12px;
+    }
+
+    /* =========================
+       Bottom Navigation (Glassmorphism)
+       ========================= */
+    nav.bottom-nav{
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      z-index: 50;
+      pointer-events: none; /* allow outer padding area to pass through */
+    }
+
+    .nav-glass{
+      pointer-events: auto;
+      width: min(var(--container), calc(100% - 24px));
+      margin: 0 auto;
+      height: var(--nav-h);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: center;
+      border-radius: 22px;
+      background: rgba(15, 20, 32, .55);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 18px 60px rgba(0,0,0,.60);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .nav-item{
+      height: 100%;
+      border: 0;
+      background: transparent;
+      color: rgba(232,238,252,.72);
+      font: inherit;
+      display: grid;
+      place-items: center;
+      gap: 4px;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+    }
+
+    .nav-item span{
+      font-size: 12px;
+      letter-spacing: .2px;
+    }
+
+    /* Active indicator (minimal + modern) */
+    .nav-item[aria-current="page"]{
+      color: rgba(232,238,252,.95);
+    }
+    .nav-item[aria-current="page"]::after{
+      content:"";
+      position: absolute;
+      bottom: 10px;
+      width: 26px;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 8px 20px rgba(124,92,255,.28);
+    }
+
+    /* Small devices tweaks */
+    @media (max-width: 420px){
+      header h1{ font-size: 15px; }
+      .section-title h2{ font-size: 17px; }
+      .nav-glass{ border-radius: 20px; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .view{ animation: none; }
+      .link-btn:hover{ transform: none; transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Single Page App (SPA) • Dark Minimal</h1>
+    <p>Navigasi bawah (glassmorphism) untuk berpindah tampilan tanpa reload halaman.</p>
+  </header>
+
+  <main>
+    <!-- HOME VIEW -->
+    <section id="view-home" class="view is-active" aria-labelledby="title-home">
+      <div class="section-title">
+        <h2 id="title-home">Home</h2>
+        <small>Daftar tautan</small>
+      </div>
+
+      <div class="link-list" role="list">
+        <!-- Tombol panjang full-width menggunakan tag <a> (siap diisi href) -->
+        <a class="link-btn" href="#" role="listitem">Tombol Link Generik 1</a>
+        <a class="link-btn" href="#" role="listitem">Tombol Link Generik 2</a>
+        <a class="link-btn" href="#" role="listitem">Tombol Link Generik 3</a>
+        <a class="link-btn" href="#" role="listitem">Tombol Link Generik 4</a>
+        <a class="link-btn" href="#" role="listitem">Tombol Link Generik 5</a>
+        <a class="link-btn" href="#" role="listitem">Tombol Link Generik 6</a>
+      </div>
+    </section>
+
+    <!-- INFO VIEW -->
+    <section id="view-info" class="view" aria-labelledby="title-info">
+      <div class="section-title">
+        <h2 id="title-info">Info</h2>
+        <small>Daftar tautan</small>
+      </div>
+
+      <div class="link-list" role="list">
+        <a class="link-btn" href="#" role="listitem">Tombol Info Generik 1</a>
+        <a class="link-btn" href="#" role="listitem">Tombol Info Generik 2</a>
+        <a class="link-btn" href="#" role="listitem">Tombol Info Generik 3</a>
+        <a class="link-btn" href="#" role="listitem">Tombol Info Generik 4</a>
+        <a class="link-btn" href="#" role="listitem">Tombol Info Generik 5</a>
+      </div>
+    </section>
+
+    <!-- PROFILE VIEW -->
+    <section id="view-profile" class="view" aria-labelledby="title-profile">
+      <div class="profile-wrap">
+        <article class="profile-card" aria-label="Kartu Profil">
+          <div class="profile-head">
+            <div class="avatar" aria-hidden="true"></div>
+            <div>
+              <h3 id="title-profile">Profil</h3>
+              <p>Keterangan singkat profil (isi sesuai kebutuhan).</p>
+            </div>
+          </div>
+
+          <div class="profile-body">
+            <p>
+              Ini adalah area deskripsi profil. Anda bisa menuliskan bio, informasi kontak,
+              atau ringkasan akun di sini. Struktur dibuat rapi, minimalis, dan responsif
+              untuk layar mobile.
+            </p>
+          </div>
+
+          <div class="profile-meta" aria-label="Metadata Profil">
+            <div class="pill">Status: Aktif</div>
+            <div class="pill">Role: User</div>
+            <div class="pill">Lokasi: —</div>
+            <div class="pill">Kontak: —</div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bottom Navigation (fixed + glassmorphism) -->
+  <nav class="bottom-nav" aria-label="Bottom Navigation">
+    <div class="nav-glass" role="tablist" aria-label="Menu utama">
+      <button class="nav-item" type="button" data-target="home" aria-current="page">
+        <span>Home</span>
+      </button>
+      <button class="nav-item" type="button" data-target="info" aria-current="false">
+        <span>Info</span>
+      </button>
+      <button class="nav-item" type="button" data-target="profile" aria-current="false">
+        <span>Profile</span>
+      </button>
+    </div>
+  </nav>
+
+  <script>
+    /**
+     * =========================
+     * SPA Tab Switcher (Vanilla JS)
+     * =========================
+     * - Mengontrol perpindahan view tanpa reload halaman.
+     * - Mengatur kelas .is-active pada section yang aktif.
+     * - Mengatur indikator menu aktif via aria-current="page".
+     */
+    (function () {
+      const navItems = document.querySelectorAll(".nav-item");
+      const views = {
+        home: document.getElementById("view-home"),
+        info: document.getElementById("view-info"),
+        profile: document.getElementById("view-profile"),
+      };
+
+      function setActive(target) {
+        // 1) Tampilkan view yang dipilih, sembunyikan lainnya
+        Object.entries(views).forEach(([key, el]) => {
+          el.classList.toggle("is-active", key === target);
+        });
+
+        // 2) Update state aktif pada bottom navigation (indikator + aksesibilitas)
+        navItems.forEach((btn) => {
+          const isActive = btn.dataset.target === target;
+          btn.setAttribute("aria-current", isActive ? "page" : "false");
+        });
+      }
+
+      // Klik pada bottom nav
+      navItems.forEach((btn) => {
+        btn.addEventListener("click", () => setActive(btn.dataset.target));
+      });
+
+      // Optional: dukung hash agar state bisa dibuka via URL (#home/#info/#profile)
+      window.addEventListener("hashchange", () => {
+        const hash = (location.hash || "").replace("#", "");
+        if (views[hash]) setActive(hash);
+      });
+
+      // Inisialisasi dari hash (jika ada)
+      const initial = (location.hash || "").replace("#", "");
+      if (views[initial]) setActive(initial);
+    })();
+  </script>
+</body>
+        </html>
