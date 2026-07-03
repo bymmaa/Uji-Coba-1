@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Sistem Rekayasa Pesawat Terbang</title>
+    <style>
+        /* CSS RESET & VARIABLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #38bdf8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* CARD STYLE & IMAGE CONTAINERS */
+        .section-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            border-left: 4px solid var(--accent);
+            padding-left: 10px;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            text-align: justify;
+            color: #e2e8f0;
+        }
+
+        .image-container {
+            width: 100%;
+            background-color: #0f172a;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1.5rem 0;
+            border: 1px dashed var(--accent);
+            position: relative;
+        }
+
+        /* Efek responsif agar gambar tidak merusak tata letak */
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .image-caption {
+            display: block;
+            padding: 0.75rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid var(--border);
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #e2e8f0;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Aerodinamika & Komponen Pesawat Terbang</h1>
+            <p class="subtitle">Eksplorasi Ilmiah Prinsip Penerbangan Modern</p>
+        </header>
+
+        <main>
+            <section class="section-card">
+                <h2>1. Empat Gaya Utama Penerbangan</h2>
+                <p>
+                    Agar sebuah pesawat terbang dapat mengangkasa dengan stabil, kendaraan tersebut harus memanipulasi empat gaya fisika utama secara seimbang melalui hukum mekanika fluida dan prinsip Bernoulli.
+                </p>
+
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?q=80&w=1000" alt="Ilustrasi Gaya Aerodinamika Pesawat">
+                    <span class="image-caption">Gambar 1: Visualisasi Interaksi Gaya Angkat, Hambatan, Berat, dan Dorong.</span>
+                </div>
+
+                <ul>
+                    <li><strong>Gaya Angkat (Lift):</strong> Dihasilkan oleh perbedaan tekanan udara di atas dan di bawah sayap (Prinsip Bernoulli).</li>
+                    <li><strong>Gaya Dorong (Thrust):</strong> Dihasikan oleh sistem penggerak seperti mesin jet atau baling-baling.</li>
+                    <li><strong>Gaya Berat (Weight):</strong> Gaya gravitasi yang menarik massa pesawat ke pusat bumi.</li>
+                    <li><strong>Gaya Hambat (Drag):</strong> Hambatan udara yang melawan pergerakan maju pesawat.</li>
+                </ul>
+            </section>
+
+            <section class="section-card">
+                <h2>2. Komponen Struktural Utama</h2>
+                <p>
+                    Struktur fisik pesawat dirancang khusus menggunakan material berkekuatan tinggi namun ringan (seperti komposit karbon dan aluminium tingkat tinggi) untuk menahan deformasi struktural selama fase penerbangan ekstrem.
+                </p>
+
+                <div class="image-container">
+                    <img src="Screenshot_20260703_061104_Google.jpg" alt="Struktur Utama Pesawat Terbang">
+                    <span class="image-caption">Gambar 2: Komponen Utama Bagian Fuselage, Wing, dan Empennage.</span>
+                </div>
+
+                <p>
+                    Komponen utama tersebut meliputi <em>Fuselage</em> (badan pesawat) sebagai kompartemen kru dan kargo, <em>Wings</em> (sayap) sebagai penghasil gaya angkat utama, serta <em>Empennage</em> (ekor pesawat) yang berfungsi menjaga stabilitas direksional (*pitch* dan *yaw*).
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Modul Digital Penerbangan. Hak Cipta Dilindungi.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
